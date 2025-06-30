@@ -1,0 +1,1702 @@
+icon "aeolys_rabbit.png"
+
+description "An attempt at modernizing total overhaul and making some of its features compatible with Elysium Remastered."
+
+modprio 2 #Load after ER
+
+
+
+
+#---Baalist sprite change---# I just really wanted to use the sprites tbh
+
+selectmonster "Ba'alite Spearman"
+spr1 "!Strum/militia_idle.png"
+spr2 "!Strum/militia_attack.png"
+size1x1
+
+selectmonster "Ba'alite Archer"
+spr1 "!Strum/archer_idle.png"
+spr2 "!Strum/archer_attack.png"
+size1x1
+
+selectmonster "Ba'alite Zealot"
+spr1 "!Strum/sword_idle.png"
+spr2 "!Strum/sword_attack.png"
+size1x1
+
+selectmonster "Ba'alite Heavy Infantry"
+spr1 "!Strum/arms_idle.png"
+spr2 "!Strum/arms_attack.png"
+size1x1
+
+selectmonster "Hierodule"
+spr1 "!Strum/savant_idle.png"
+spr2 "!Strum/savant_attack.png"
+size1x1
+
+selectmonster "High Priestess"
+spr1 "!Strum/lore_idle.png"
+spr2 "!Strum/lore_attack.png"
+size1x1
+
+selectmonster "Anointed Priestess"
+darkbless 1
+desert
+terraformfrom 0
+terraformto 117
+terraformch 30
+spr1 "!Strum/sorc_idle.png"
+spr2 "!Strum/sorc_attack.png"
+size1x1
+
+
+#---Cloud Lord Changes---# # Adds more airya specific content
+
+newweapon     "Golden Hammer"   
+trgrank              1 # Target: front enemy (any enemy in range, preferring front-most).
+range                1
+init                 6
+dmgtype              2 # Blunt.
+dmg                  6 
+aoe                  0 # Area: single target.
+sound                1 # spear.smp (Spear)
+
+newmonster "Silent Kingsguard"
+spr1 "!Strum/Nazca/apu_idle.tga"
+spr2 "!Strum/Nazca/apu_attack.tga"
+armor                          2 # Armor.
+hp                             8 # Hit Points.
+str                            5 # Strength.
+mor                            99 # Morale.
+mr                             5 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweapon                3 "Golden Hammer" 
+flying                          
+coldres                      100 # Cold immunity.
+poisonres                    100 # Poison immunity.
+shockres                     100 # Shock immunity
+flying
+undead
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+battlefast                       # Can move 2 squares per turn in combat.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+fireres                     -100 
+descr "When a Silent King transcends, a small portion of his guard may also transcend with him and become a quasi-alive guardian of their king. Fearsome and unquestioning, the Silent Kingsguard are a unit the greatest kings of Elysium can only dream of."
+
+newmonster "Diamondclad"
+spr1 "!Strum/Nazca/supaya_idle.tga"
+spr2 "!Strum/Nazca/supaya_attack.tga"
+armor                          3 # Armor.
+hp                             8 # Hit Points.
+str                            4 # Strength.
+mor                            6 # Morale.
+mr                             6 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweapon                2 768 # Ice Lance: d4 Pierce damage.
+flying                          
+coldres                      50 
+poisonres                    100 # Poison immunity.
+shockres                     100 # Shock immunity
+flying
+frontpos
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+battlefast                       # Can move 2 squares per turn in combat.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+iceprot
+fireres                     -100 
+descr "Airya warriors now eternally encased in diamond, the Diamondclad are a strong if unconventional method to seize the power of air. While it can't be said that they mind it too much - possibly because that involves too much thinking - there is a potential ethics debate on seizing your warriors at random and mutating their body permenantly. It's unclear what the long term effect of this process is as none of the Diamondclad have lived to old age. The most common death involves either physically melting, or shattering like a rock."
+
+
+#---Cloud Lord Rituals---#
+
+selectritual "Awaken the Silent Kings"
+clearritspec
+ritpow                49 	# Cloud Lord
+level                  3
+cost              9   300 	# 300 Diamonds
+terr 265 					#Cloud Palace
+summoning 
+addstring "c*Silent King & 5d2*Silent Kingsguard"
+noundead
+maxcast 5
+aialways 999
+ainosimul
+airestrig 300
+descr "This ritual awakens one of the five Silent Kings from his vigil. The Silent Kings are powerful casters, and if one should fall in battle, his body will reform in the Cloud Palace."
+
+selectritual "Infuse Warriors With Diamonds"
+ritpow                49 	# Cloud Lord
+level                  2
+cost              9   25 	# 300 Diamonds
+promotion			  5    
+addstring "Airya Swordsman"
+addstring "Diamondclad"
+addstring "Iceclad"
+addstring "Diamondclad"
+descr "This ritual permanently turns five Airya warriors bodies into a diamondlike sheathe."
+
+newritpow
+
+newritual "Greater Cloud Step"
+level 					2
+cost               		8 25 # 25 sapphires & 25 diamonds
+cost					9 25
+free
+terr 					194 # Cloud
+chooseterrloc 			194
+airare 					-1
+teleportloc				3
+closewin 				# closes cast ritual window
+descr "The Cloud Prince has his army absorbed into a cloud and reforms it in another. Must target standard Clouds."
+
+selectmonster "Cloud Prince"
+power 0 2
+
+#---Duke Changes---#
+#---Duke Weaponry---#
+
+newweapon "Arquebus"
+range 6
+init 1
+dmgtype 3
+dmg 5
+flymode 1
+flylook 2
+flysound 206
+sound 209
+an
+lob
+arrow
+mundane
+reload3
+shieldneg
+rangepen
+scatter
+
+newweapon "Flintlock Musket"
+range 7
+init 1
+dmgtype 3
+dmg 6
+flymode 1
+flylook 2
+flysound 207
+sound 209
+an
+lob
+arrow
+mundane
+reload2
+shieldneg
+rangepen
+
+newweapon "Flintlock Carbine"
+range 5
+init 5
+dmgtype 3
+dmg 4
+flymode 1
+flylook 2
+flysound 207
+sound 209
+an
+lob
+arrow
+mundane
+scatter
+reload1
+
+newweapon "Cavalry Saber"
+range      1
+init       6
+dmgtype    1
+dmg        7
+mundane
+sound      8
+
+newweapon "8pdr Mortar"
+trgrank 9
+range 24
+init 1
+dmgtype 2
+dmg 4
+flymode 9
+flylook 84
+flysound 203
+sound 212
+reloadsnd 214
+reload2
+an
+scatter
+mundane
+lob
+nextalways
+nextdmg 6
+
+newweapon "8pdr Explosion"
+dmgtype 4
+look 68
+aoe 03
+an
+mundane
+
+newweapon "Crude 8pdr Mortar"
+trgrank 9
+range 24
+init 1
+dmgtype 2
+dmg 2
+flymode 9
+flylook 84
+flysound 203
+sound 212
+reloadsnd 214
+reload2
+an
+scatter
+mundane
+lob
+nextalways
+nextdmg 4
+
+newweapon "Crude 8pdr Explosion"
+dmgtype 4
+look 68
+aoe 02
+an
+mundane
+
+newweapon "32pdr Mortar"
+trgrank 9
+range 36
+init 1
+dmgtype 2
+dmg 24
+flymode 9
+flylook 84
+flysound 204
+sound 213
+reloadsnd 214
+reload3
+an
+scatter
+mundane
+lob
+nextalways
+nextdmg 24
+
+newweapon "32pdr Explosion"
+dmgtype 4
+look 68
+aoe 9
+an
+mundane
+
+newweapon "4pdr Cannon"
+trgrank 9
+range 28
+init 1
+dmgtype 2
+dmg 12
+nextalways
+nextdmg 12
+flymode 1
+flylook 33
+flysound 200
+sound 210
+reloadsnd 214
+reload2
+an
+mundane
+lob
+
+newweapon "4pdr Roll"
+trgrank 9
+dmgtype 2
+aoe 5002
+look 27
+
+newweapon "6pdr Cannon"
+trgrank 9
+range 32
+init 1
+dmgtype 2
+dmg 14
+nextalways
+nextdmg 14
+flymode 1
+flylook 33
+flysound 200
+sound 210
+reloadsnd 214
+reload2
+an
+mundane
+lob
+
+newweapon "6pdr Roll"
+trgrank 9
+dmgtype 2
+aoe 5003
+look 27
+
+newweapon "8pdr Cannon"
+trgrank 9
+range 36
+init 1
+dmgtype 2
+dmg 16
+nextalways
+nextdmg 16
+flymode 1
+flylook 33
+flysound 200
+sound 210
+reloadsnd 214
+reload3
+an
+mundane
+lob
+scatter
+
+newweapon "8pdr Roll"
+trgrank 9
+dmgtype 2
+aoe 5004
+look 27
+
+newweapon "Bayonet"
+range 1
+init 6
+dmgtype 3
+dmg 5
+sound 1
+
+newweapon     "Flail Charge"                                              #  13
+trgrank              1 # Target: front enemy (any enemy in range, preferring front-most).
+range                1
+init                 5
+sweep
+dmgtype              2 # Pierce.
+dmg                  0 # Base damage (added to dmg value where this weapon is used).
+aoe                  1 # Area: single target.
+oneshot                # Can only be used once per battle.
+mundane                # Non-magic. Ethereal units have a 75% chance to be unaffected.
+sound               84 # hit_impact.sw
+
+#---Duke Units---#
+
+
+selectmonster "Zweihander"
+frontpos
+
+selectmonster "Halberdier"
+frontpos
+
+selectmonster "High Magus"
+holy
+
+selectmonster "King"
+holy
+awe 1
+leadership 3
+
+newmonster "Arquebussier"
+spr1 "Arquebussier.tga"
+spr2 "Arquebussier2.tga"
+hp 7
+armor 1
+mr 4
+mor 6
+str 4
+rank 0
+frontpos
+slow
+human
+allitemslots
+rangedweapon 0 "Arquebus"
+meleeweapon -1 "Shortsword"
+descr "The resurgence of the Duchy brought with it the introduction of gunpowder based weapons, the simplest of which is the Arquebus, which is little more than a long smoothbore musket that requires a stand to stabilize. It is inaccurate, slow to reload, and too cumbersome to bring along for campaigns, but a line of Arquebussiers on a wall are more than sufficient deterrent for most would-be attackers."
+
+newmonster "Musketeer"
+spr1 "Musketeer.tga"
+spr2 "Musketeer2.tga"
+hp 6
+armor 0
+mr 4
+mor 6
+str 4
+rank 0
+frontpos
+human
+allitemslots
+rangedweapon 0 "Flintlock Musket"
+meleeweapon 0 "Bayonet"
+descr "With the introduction of mass-produced and portable musketry, massed archers no longer need to make up the bulk of the King's armies. Instead, formations of Musketeers are deployed - preferably on high ground - to rain death upon the enemy while pikemen and halberdiers hold said enemy at bay."
+
+newmonster "Cuirassier"
+spr1 "Cuirasser.tga"
+spr2 "Cuirasser2.tga"
+hp 12
+armor 1
+mr 4
+mor 7
+str 5
+rank 1
+frontpos
+human
+allitemslots
+nobootslots
+fast
+battlefast
+pierceres
+meleeweapon 0 "Cavalry Saber"
+meleeweaponbonus 0 "Cavalry Saber"
+meleeweapon 4 "Hoof"
+descr "The nobility and knighthoods were hardly unaffected by the introduction of gunpowder to the Kingdom. Much of the upper class's cavalry contributions to the army became less armored overall, but the armor that was donned was designed specifically to reduce the chances of death from friendly - or not so friendly - fire. This lightly armored cavalry is largely used for maximum shock at the start of a battle before either retreating or - more likely - dying to a man."
+
+newmonster "Dragoon"
+spr1 "Dragoon.tga"
+spr2 "Dragoon2.tga"
+hp 11
+armor 1
+mr 4
+mor 6
+str 4
+rank 1
+human
+allitemslots
+nobootslots
+fast
+battlefast
+rangedweapon 0 "Flintlock Carbine"
+meleeweapon -1 "Cavalry Saber"
+meleeweapon 4 "Hoof"
+descr "Some of the nobility are smarter than others. For example, those that pay to have the smallest possible musket so that they may use it on horseback can accomplish much more than their stupider counterparts who simply rush into melee with whatever throng of men or horrid beast lies in front of them. Unfortunately, these muskets are not as accurate or damaging as their more common counterparts, despite being easier to load and use."
+
+newmonster "Crude Mortar"
+spr1 "Mortarsmall.tga"
+spr2 "Mortarsmall2.tga"
+hp 5
+armor 0
+mr 4
+mor 5
+str 4
+rank -1
+rearpos
+human
+immobile
+miscslots
+pierceres
+fireres -50
+fireexpl 6
+slow
+siegeweapon 2 "Crude 8pdr Mortar"
+rangedweapon 0 "Crude 8pdr Mortar"
+meleeweapon -1 "Shortsword"
+descr "The simplest way to upscale firearms turned out to be to produce a thick, short bowl in which to place a charge and then shot upon that charge called a Mortar, probably because Alchemists had too much say in the project. Though wildly inaccurate and cumbersome, mortars have exceptional range and are easier to load and fire than most artillery and can be produced in such quantity that even the most amateur of alchemists can produce one."
+
+newmonster "Field Mortar"
+spr1 "Mortarsmall.tga"
+spr2 "Mortarsmall2.tga"
+hp 9
+armor 0
+mr 4
+mor 5
+str 4
+rank -1
+rearpos
+human
+immobile
+miscslots
+pierceres
+fireres -50
+fireexpl 6
+siegeweapon 2 "8pdr Mortar"
+rangedweapon 0 "8pdr Mortar"
+meleeweapon -1 "Shortsword"
+descr "A masterful middle ground between heavy and light artillery, the Field Mortar is a portable yet deadly artillery piece. While still inaccurate, these mortars do a moderate amount of damage and can be stockpiled carefully. Care must be taken as any fire in the area could cause a spectacular explosion."
+
+newmonster "Deathsknell"
+spr1 "Mortarbig.tga"
+spr2 "Mortarbig2.tga"
+hp 20
+armor 0
+mr 4
+mor 5
+str 4
+rank -1
+immobile
+rearpos
+human
+huge
+drawsize 30
+slow
+miscslots
+pierceres
+fireres -50
+fireexpl 18
+fear 1
+siegeweapon 0 "32pdr Mortar"
+rangedweapon 0 "32pdr Mortar"
+meleeweapon -1 "Shortsword"
+meleeweapon -1 "Shortsword"
+descr "Taken to the extreme, mortars can be increased to incredible sizes, to the point where it is nearly impractical to take them into the field. The sight of these behemoths alone are enough to cause the bravest commander to falter. The Deathsknells are quite powerful, but require a massive investment of resources to build and maintain."
+
+newmonster "Light Field Gun"
+spr1 "4pdr.tga"
+spr2 "4pdr2.tga"
+hp 8
+armor 0
+mr 4
+mor 5
+str 4
+rank -1
+frontpos
+human
+immobile
+miscslots
+fireres -25
+fireexpl 4
+siegeweapon 0 "4pdr Cannon"
+rangedweapon 0 "4pdr Cannon"
+meleeweapon 0 "Shortsword"
+descr "The other method of upscaling firearms technology had nothing to do with the Alchemists and their ridiculous magic-based terminology. Someone simply asked 'Why not build a bigger gun?' and the road to building the first cannon was set upon. Early Field Gun models tended to be small and weak, but accurate and easy to reload."
+
+newmonster "Field Gun"
+spr1 "6pdr.tga"
+spr2 "6pdr2.tga"
+hp 12
+armor 0
+mr 4
+mor 5
+str 4
+rank -1
+frontpos
+human
+immobile
+miscslots
+fireres -50
+fireexpl 6
+siegeweapon 0 "6pdr Cannon"
+rangedweapon 0 "6pdr Cannon"
+meleeweapon 0 "Shortsword"
+descr "The other method of upscaling firearms technology had nothing to do with the Alchemists and their ridiculous magic-based terminology. Someone simply asked 'Why not build a bigger gun?' and the road to building the first cannon was set upon. Later on, as Field Guns became more important to military doctrine and there came a need for more range and damage, larger cannon were developed. Today, these represent a valid middle ground between light guns and heavy guns, having neither the drawbacks nor advantages of either."
+
+newmonster "Heavy Field Gun"
+spr1 "8pdr.tga"
+spr2 "8pdr2.tga"
+hp 16
+armor 0
+mr 4
+mor 5
+str 4
+rank -1
+frontpos
+slow
+immobile
+human
+slow
+miscslots
+pierceres
+fireres -50
+fireexpl 8
+siegeweapon 0 "8pdr Cannon"
+rangedweapon 0 "8pdr Cannon"
+meleeweapon 0 "Shortsword"
+descr "The other method of upscaling firearms technology had nothing to do with the Alchemists and their ridiculous magic-based terminology. Someone simply asked 'Why not build a bigger gun?' and the road to building the first cannon was set upon. The latest Field Gun designs are the embodiment of this philosophy and have unparalleled range and destructive power, but suffer from accuracy issues and are difficult to move, relegating them to defending fortified locations."
+
+newmonster "Red Lady"
+spr1 "!Strum/queen_idle.png"
+spr2 "!Strum/queen_attack.png"
+rank -1       
+hp 11
+armor 0
+mr 9
+mor 8
+str 3
+spellweapon 51 2 				# High Arcana at level 2.
+meleeweapon 0 1
+human
+female
+size1x1
+allitemslots
+nametype 3 #Anglo-Sax Fem
+power 6 2 #baron level powers
+goldbonus                     10 # 10% bonus to all gold income for the player that owns this unit while it exists.
+ironbonus                     10 # 10% bonus to all iron income for the player that owns this unit while it exists.
+leadership 2
+spawnmon 20
+randomitem 100
+descr "A member of the order of Scarlet Sisters, the Red Lady is a master of magic and powerful noble. When the King announced he was looking for a bride, the Scarlet Sisters were quick to convince the Church with a hefty donation to put her in the pool. Now that the Scarlet Sisters have a foothold on the monarchy, they're not likely to give it up easily. The Red Lady is very popular with both the vassals and the people, inspiring higher taxes from the former and attracting more warriors from the latter."
+
+newmonster "Scarlet Guard"
+spr1 "!Strum/knight_idle.png"
+spr2 "!Strum/knight_attack.png"
+armor                          3 # Armor.
+hp                            14 # Hit Points.
+str                            5 # Strength.
+mor                           10 # Morale.
+mr                             8 # Magic Resistance.
+rank                           1 # Front rank.
+#spellweapon               51   1 # Paladin Magic at level 3.
+meleeweaponspec           15  834 # Golden Lance Charge: d12 Pierce damage.
+meleeweapon                0   606 # Broadsword: d8 Slash damage.
+meleeweaponbonus           4  95 # Hoof: d4 Blunt damage.
+battlefast                       # Can move 2 squares per turn in combat.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+# res19                          # Combat Caster.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+nobootslots                      # Has no boot slots.
+size1x1
+female
+fast
+nametype                      3 # 
+descr "Emmissaries from the order of the Scarlet Sisters, the Scarlet Guard exist to ensure that the new influence the order gets by having one of their own on the throne stays secure. Their lances are enchanted and will strike through ethereal enemies just as well as flesh."
+
+newmonster "Green Lady"
+spr1 "!Strum/ManMA/mother_idle.tga"
+spr2 "!Strum/ManMA/mother_attack.tga"
+rank -1       
+hp 11
+armor 0
+mr 9
+mor 8
+str 3
+spellweapon 54 2 				# Forest Magic at level 2.
+meleeweapon 0 1
+human
+female
+size1x1
+allitemslots
+nametype 3 #Anglo-Sax Fem
+#power 6 5 #baron level powers
+goldbonus                     10 # 10% bonus to all gold income for the player that owns this unit while it exists.
+ironbonus                     10 # 10% bonus to all iron income for the player that owns this unit while it exists.
+leadership 2
+spawnmon 15
+power 16 1 # Lar Power
+drawsize 5
+descr "A member of the order of Green Enchantresses, the Green Lady is a master of magic. When the King announced he was looking for a bride, the natives of Elysium were quick to open their stockpiles and pillage some villages for coin to send to the Church in order to convince them to put her in the candidate pool. Popular with both the people and the natives of Elysium, The Green Lady has quickly been able to assume power over Elysium's denizens. Some of the natives of Elysium have even sworn fealty to the King, now that someone sympathetic to their plight is in power."
+
+newmonster "Centaur Faithful"
+spr1 "!Strum/PangeaEA/centaur_idle.tga"
+spr2 "!Strum/PangeaEA/centaur_attack.tga"
+armor                          0 # Armor.
+hp                            14 # Hit Points.
+str                            6 # Strength.
+mor                            4 # Morale.
+mr                             5 # Magic Resistance.
+rank                           0 # Mid rank.
+rangedweapon               3  28 # Longbow: d5 Pierce damage.
+meleeweapon                1   1 # Dagger: d4 Pierce damage.
+meleeweaponbonus           4  95 # Hoof: d4 Blunt damage.
+fast                             # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+foreststealth                    # When in a forest or jungle, can only be seen by units with Acute Senses or Spirit Sight.
+nobootslots                      # Has no boot slots.
+size1x1                          # Only takes up a single square on the battlefield (overrides sprite size).
+nametype                       9 # Pangaea male.
+descr "Some of the more forward thinkers among the Centaurs of Elysium believe that it is no longer possible to force man out of Elysium. Now that the Green Lady, someone sympathetic to their plight, is in power, the Centaur Faithful will do what they can to keep her in power. Armed with a bow and skilled in forest lore, these warriors are more than a match for the traditional riders of manm though it remains to be seen if they compare to riders armed with gunpowder."
+
+newmonster "White Lady"
+copystats "Augur"
+spr1 "!Strum/ArcoEA/melissa_idle.tga"
+spr2 "!Strum/ArcoEA/melissa_attack.tga"
+rank -1       
+hp 11
+armor 0
+mr 9
+mor 8
+str 3
+spellweapon 52 2 				# Moon Magic at level 2.
+meleeweapon 0 1
+human
+female
+size1x1
+allitemslots
+voidsanity 10
+nametype 3 #Anglo-Sax Fem
+#power 6 5 #baron level powers
+goldbonus                     10 # 10% bonus to all gold income for the player that owns this unit while it exists.
+ironbonus                     10 # 10% bonus to all iron income for the player that owns this unit while it exists.
+leadership 2
+spawnmon 15
+descr "A noblewoman orphaned by war, it is said the White Lady learned her magic my staring at the moon until half of her mind was gone. When she speaks, she does so in a dreamy quality as if dazed, and she never seems to sleep. Rumour has it she blackmailed the Abbot into electing her as the candidate for the bride. With one foot in reality and another in the stars, she has alarmingly quickly took control of the King's beauracracy, sniffing out nobles shorting their taxes as if the information was whispered in her ear. She has quickly amassed a cult following by speaking out small time prophecies to people, seemingly at random, who have formed the Cult of The Moon."
+
+newmonster "Moon Knight"
+spr1 "!Strum/UlmLA/black_lord_idle.tga"
+spr2 "!Strum/UlmLA/black_lord_attack.tga"
+armor                          2 # Armor.
+hp                            11 # Hit Points.
+str                            5 # Strength.
+mor                           8 # Morale.
+mr                             8 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweaponspec           12  "Flail Charge" # Lance Charge: d12 Pierce damage.
+meleeweapon                2  25 # Flail: d8 Blunt damage.
+meleeweaponbonus           4  95 # Hoof: d4 Blunt damage.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+# res19                          # Combat Caster.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+nobootslots                      # Has no boot slots.
+size1x1
+frontpos
+fast
+nametype                      3 # 
+descr "Members of The Cult of The Moon have exploded since the Lady of The Moon's coronation. It's not entirely clear what their purpose is, but they seem to enjoy inflicting violence for their Lady and have enough money to outfit a man in full plate with a destrier, so the King is content to leave them alone. Skilled with the flail, these knights can decimate an opponent in a single charge."
+
+
+newmonster "Black Lady"
+spr1 "!Strum/ManMA/fay_idle.tga"
+spr2 "!Strum/ManMA/fay_attack.tga"
+rank -1       
+hp 11
+armor 0
+mr 9
+mor 8
+str 3
+spellweapon 62 2 				# Moon Magic at level 2.
+meleeweapon 0 1
+rangedweapon25 7 611
+human
+female
+size1x1
+allitemslots
+nametype 3 #Anglo-Sax Fem
+#power 6 5 #baron level powers
+goldbonus                     10 # 10% bonus to all gold income for the player that owns this unit while it exists.
+ironbonus                     10 # 10% bonus to all iron income for the player that owns this unit while it exists.
+leadership 2
+spawnmon 15
+descr "A former member of the Scarlet Sisters, the Black Lady went rogue long ago and was thought to be dead. Shortly after showing up abruptly when the King requested a bride, the other candidates all fell sick and the Church quickly put her in as their candidate for the King's bride. After disintegrating a tedious nobleman, the rest of the vassals have quickly gotten in line. The King, while at first concerned, has left the Black Lady to her own devices, who seems to be content with the amount of power she currently wields. That said, it is well noted that the King has had guards within reach at all times since the wedding."
+
+newmonster "Black Unicorn Knight"
+spr1 "!Strum/UlmLA/u_heroine_idle.tga"
+spr2 "!Strum/UlmLA/u_heroine_attack.tga"
+armor                          1 # Armor.
+hp                            12 # Hit Points.
+str                            4 # Strength.
+mor                            7 # Morale.
+mr                             6 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweaponspec           15  13 # Lance Charge: d15 Pierce damage.
+meleeweapon                2   2 # Broadsword: d8 Slash damage.
+meleeweaponbonus           7 519 # Alicorn: d7 Pierce damage.
+meleeweaponbonus           4  753 # Foul Bite: d4 Blunt damage.
+fast                             # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+poisonres                    100 # Poison immunity.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+fastheal                         # Heals all wounds in two months at most. Also heals permanent afflictions over time, but not as quickly as with regeneration.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+nobootslots                      # Has no boot slots.size1x1
+size1x1
+female
+frontpos
+fast
+nametype                      3 # 
+descr "Uncontent with the tried-and-true method of sacrificing young girls to attract a unicorn, the Black Lady has invented a novel new way of attracting unicorns. By finding young girls with the blackest hearts, it is possible to attract and trick a unicorn into consuming human flesh. The process turns the coat into inky black and drives the unicorns mad, until a woman with an equally black heart can take it out into a battlefield and consume more flesh. While it can't be said the Black Unicorn Knights are loyal to the Black Lady, they certainly fear her wrath enough to offer a facsimilie of loyalty."
+
+newmonster    "Monk "                                                     #   10
+descr "Monks are usually boring men who like to preach about El, the coming of the Apocalypse and how we are all going to die in flames if we aren't dead of pestilence before that.  They do have their uses though, as they know the secret of creating good farmlands from seemingly useless swamps."
+# sprite number             2008
+armor                          0 # Armor.
+hp                             5 # Hit Points.
+str                            4 # Strength.
+mor                            3 # Morale.
+mr                             5 # Magic Resistance.
+rank                          -1 # Back rank.
+spellweapon               25   1 # Prayers at level 1.
+meleeweapon                0   1 # Dagger: d3 Pierce damage.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+holy                             # Always receives Bless effects.
+allitemslots                     # Has the full set of item slots.
+power                      27  1 # Monk, level 1.
+mastery                        1 # A mastery effect will change this monster to the type defined 1 after this one; i.e. monster #11: Abbot.
+
+
+newmonster    "Abbot "                                                    #   11
+descr "Some problematic monks are not satisfied with the regular studies and prayers of their profession. This is particularly true to monks of noble birth. To alleviate their political aspirations the wise ruler gives the church a piece of land and allows the overly ambitious monk to found a monastery to run."
+# sprite number             1098
+armor                          0 # Armor.
+hp                             7 # Hit Points.
+str                            4 # Strength.
+mor                            3 # Morale.
+mr                             7 # Magic Resistance.
+rank                          -1 # Back rank.
+spellweapon               25   2 # Prayers at level 2.
+meleeweapon                0   1 # Dagger: d3 Pierce damage.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+holy                             # Always receives Bless effects.
+allitemslots                     # Has the full set of item slots.
+power                      27  2 # Monk, level 2.
+
+
+newmonster    "Lord Commander"                                                #    1
+descr "Unlike the Baron's hierarchy of nobles, the Lord Commanders are not a rulers of high houses, rather they are whichever noble knows how to ride a horse and lacks the intellectual ability to grasp alchemy. Many of the former High Lords rebelled against the Duke's power, but a few mortar rounds fired into their castles quickly brought whoever was still alive to heel. Despite the intellectual revolution going throughout the duchy, the Lord Commanders still are given their old right of raising militia, something the duke is happy to turn a blind eye on while it benefits him."
+spr1 "!Strum/ManMA/knight_commander_idle.tga"
+spr2 "!Strum/ManMA/knight_commander_attack.tga"
+armor                          3 # Armor.
+hp                            13 # Hit Points.
+str                            5 # Strength.
+mor                            6 # Morale.
+mr                             5 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweaponspec           12  13 # Lance Charge: d12 Pierce damage.
+meleeweapon                0   2 # Broadsword: d6 Slash damage.
+meleeweapon                0   2 # Broadsword: d6 Slash damage.
+fast                             # The monster has 4 AP and also moves twice on the battlefield per turn in combat.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+shield                           # Reduces damage from most weapons by 0-1; 0-2 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+nobootslots                      # Has no boot slots.
+power 6 1
+size1x1
+leadership                     1 # +1 Morale for units commanded by this unit.
+localleadership                1 # +1 Morale for allied units within two squares of this unit.
+nametype                       2 # Anglo-Saxon male.
+
+newmonster    "Learned Noble"                                                #    8
+descr "An educated noble who has learned of the arts of alchemy through going to an Academy of Magic or through thorough tutelage at home. They are little better than run-of-the-mill alchemists but have learned enough from the Dukes ramblings to emulate some of his more basic creations. While their family might disapprove of such non-noble pursuits, the duchy offers recognition and funds for anyone of noble stock capable of such alcehmical prowess. Those not of noble stock are given an arquebus, if they're lucky. Each Learned Noble increases iron income by a small amount that is cumulative"
+spr1 "!Strum/BogarusLA/kalendologist_idle.tga"
+spr2 "!Strum/BogarusLA/kalendologist_attack.tga"
+armor                          0 # Armor.
+hp                             6 # Hit Points.
+str                            3 # Strength.
+mor                            5 # Morale.
+mr                             7 # Magic Resistance.
+rank                          -1 # Back rank.
+spellweapon               55   1 # Alchemy at level 1.
+meleeweapon                0   1 # Dagger: d3 Pierce damage.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+ironbonus 					3
+nametype 					   2 #Anglo-Saxon male
+
+newmonster    "Duke"                                                #    8
+descr "Ambition, intellect, and noble funds have elevated the Duke above the peerage. While lacking the physical strength commonly exhibited by the Barons, the Duke has the advantage of intellect and years of alchmical study. That said, it will take more than modern weaponry to bring the nobility to heel. Spitting on centuries of tradition, the Duke will need to seek the approval of a higher power if he is to keep his seat long enough to see his grand designs through. He has kept the sword however. He seems rather attached to it."
+spr1 "!Strum/Vanarus/human_jarl_idle.tga"
+spr2 "!Strum/Vanarus/human_jarl_attack.tga"
+armor                          1 # Armor.
+hp                             7 # Hit Points.
+str                            3 # Strength.
+mor                            6 # Morale.
+mr                             8 # Magic Resistance.
+rank                          -1 # Back rank.
+spellweapon               55   2 # Alchemy at level 2.
+meleeweapon                0   2 # Broadsword
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+ironbonus 						50
+leadership                     1 # +1 Morale for units commanded by this unit.
+localleadership                1 # +1 Morale for allied units within two squares of this unit.
+nametype 					   2 #Anglo-Saxon male
+
+newmonster 	"Archduke"
+descr "The Archduke has, through the blessing of the venerable Church of El, been anointed as righful ruler of Elysium. His first order has been recorded as 'Let none who disobey live to see the morning sun'. Following this ruling, he has taken control of all the mines and bolstered iron gathering for his troops by an astronomical rate, as well as a sudden approval spike from the nobility. Following this, little has been seen of the Archduke, although distant booms can be heard for miles from his enclosed castle, and his hair has turned a yellowish-white seemingly overnight." 
+spr1 "!Strum/Vanarus/chud_jarl_idle.tga"
+spr2 "!Strum/Vanarus/chud_jarl_attack.tga"
+armor                          1 # Armor.
+hp                             8 # Hit Points.
+str                            4 # Strength.
+mor                            7 # Morale.
+mr                             8 # Magic Resistance.
+rank                          -1 # Back rank.
+spellweapon               55   3 # Alchemy at level 3.
+meleeweapon                0   2 # Broadsword
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+leadership                     1 # +1 Morale for units commanded by this unit.
+localleadership                1 # +1 Morale for allied units within two squares of this unit.
+holy
+ironbonus 				   100
+goldbonus 					10
+nametype 					   2 #Anglo-Saxon male
+
+newmonster 	"Ducal Guard"
+descr "The Ducal Guard are former heavy infantry given alchemically enhanced armor. With armor this tough, shields are left behind in favor of another sword to kill the Duke's enemies. That said, the sheer weight of the armour makes it impractical for long marches, so they are more frequently seen guarding the Duke's siege engines. They are also personally blessed by the Church of El to give the Abbot some semblance of power. "
+spr1 "!Strum/ManMA/lord_warden_idle.tga"
+spr2 "!Strum/ManMA/lord_warden_attack.tga"
+armor                          4 # Armor.
+hp                             9 # Hit Points.
+str                            5 # Strength.
+mor                            5 # Morale.
+mr                             5 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweapon                0   2 # Broadsword: d6 Slash damage.
+meleeweaponbonus 		   0   2
+slow                             # The monster only has 2 AP.
+frontpos
+holy
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+largeshield                      # Reduces damage from most weapons by 0-2; 0-4 against ranged weapons.
+allitemslots                     # Has the full set of item slots.
+
+newmonster    "Ducal Zweihander"                                               #   18
+descr "Given alchemically enchanced plate armor, the Duke's zweihander corps are marginally better off than the general zweihander population. Lacking the prestige and heavy armour characteristic of the Ducal Guard, these zweihanders are capable of moving swiftly with the main army."
+spr1 "!Strum/UlmLA/zweihander_idle.tga"
+spr2 "!Strum/UlmLA/zweihander_attack.tga"
+armor                          2 # Armor.
+hp                             8 # Hit Points.
+str                            4 # Strength.
+mor                            5 # Morale.
+mr                             5 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweapon                0  21 # Greatsword: d9 Slash damage.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+
+newclass
+setclassname "Duke"
+classdescr "Once a petty Baron, the Duke is a scientist and forward thinker. While the Barons fought and conquered all of Elysium, the Duke stayed in his demesne and experimented with alchemy. Finally, he is ready to show Elysium just how effective powder is. Not to too far away from his roots, the Duke also employs large amounts of knights and siege engines, although these engines are far more fearsome. ^^Unlike the Baron, the Duke does not bother with petty conscription of lesser men, but relies on alchemical magics to outfit his troops with modern firepower. He recieves extra iron from any mines and is not unfamiliar with the improvement of infrastructure, but he does not possess the skills of lower vassal brow beating required of his more traditional peers. "
+
+classabdescr "The Duke collects vast quantities of iron ore to build his siege engines. While intensely powerful, these engines are weak to fire and have the habit of exploding when damaged too much. ^^While his troops are competent in melee and range, their propensity for inaccuracy often results in friendly fire. "
+
+hometerr 30
+addstartterr 14
+addstartterr 18
+humancost 100
+classtune 125
+
+addstartcom "Monk "
+addstartunits "Arquebussier" 5
+addstartunits "Longbowman" 5
+addstartunits "Spearman" 10
+addstartunits "Knight" 5
+addstartunits "Crude Mortar" 2
+setmaincom "Duke"
+
+#----Duke Recruits---#
+nostdtroops
+#Commanders
+
+
+addcomrec   "Intellectual Noble" 4 60 10 10
+addcomrec   "Lord Commander" 20 50 10 10
+addcomrec   "Captain" 20 40 10 0
+addcomrec   "Court Mage" 5 40 15 0
+libraryrec
+
+addcomrec   "Duke" 10 60 10 10
+reclimiter  "-Duke"
+addcomrec   "Lord Commander" 20 50 10 10
+addcomrec   "Captain" 20 40 10 0
+addcomrec   "Monk" 5 50 10 0
+templerec
+libraryrec  
+#T1 std
+addunitrec  "War Dog" 100 5 25 0 0
+addunitrec  "Spearman" 100 5 50 0 0
+reclimiter "-Archduke"
+addunitrec  "Swordsman" 100 5 50 0 5
+reclimiter "-Archduke"
+addunitrec  "Crossbowman" 100 5 50 0 5
+addunitrec  "Heavy Infantry" 100 5 50 0 25
+addunitrec  "Longbowman" 100 5 60 0 0
+reclimiter "-Archduke"
+addunitrec  "Archer" 5 10 70 0 0
+reclimiter "-Archduke"
+addunitrec  "Crossbowman" 5 10 70 0 7
+reclimiter "-Archduke"
+addunitrec  "Spearman" 5 10 70 0 0
+reclimiter "-Archduke"
+addunitrec  "Swordsman" 5 10 70 0 7
+reclimiter "-Archduke"
+addunitrec  "Cavalryman" 100 3 50 0 20
+reclimiter "-Archduke"
+addunitrec "Knight" 100 3 60 0 25
+reclimiter "+High Lord"
+addunitrec "Tower Guard" 100 5 50 0 15
+reclimiter "-Archduke"
+#T1 arty
+addunitrec  "Catapult"  100 1 25 0 50
+reclimiter "-Archduke"
+addunitrec  "Trebuchet" 100 1 50 0 50
+reclimiter "-Archduke"
+#T2 std
+addunitrec  "Pikeneer" 100 5 50 0 5
+reclimiter "+Archduke"
+addunitrec  "Halberdier" 100 5 50 0 5
+reclimiter "+Archduke"
+addunitrec  "Zweihander" 100 5 50 0 10
+reclimiter "+Archduke"
+addunitrec "Arquebussier" 100 5 60 0 5
+addunitrec "Musketeer" 100 5 75 0 0
+reclimiter "+Archduke"
+addunitrec "Cuirassier" 100 5 75 0 20
+reclimiter "+Archduke"
+addunitrec "Dragoon" 100 5 100 0 10
+reclimiter "+Archduke"
+#T2 arty
+addunitrec "Field Mortar" 100 2 75 0 100
+reclimiter "+Duke"
+reclimiter "+Archduke"
+addunitrec "Light Field Gun" 100 2 60 0 115
+reclimiter "+Duke"
+addunitrec "Field Gun" 100 1 50 0 50
+reclimiter "+Archduke"
+addunitrec "Heavy Field Gun" 100 1 75 0 75
+reclimiter "+Archduke"
+#Scout
+addmercrec "Scout" 10 1 15 10 0
+
+#--- Monk Rituals---#
+
+newritpow #Monk
+
+newritual "Benediction "
+copyritual "Benediction"
+
+newritual "Drain Swamp "
+copyritual "Drain Swamp"
+
+newritual "Found Monastery "
+copyritual "Found Monastery" # Should copy ER's changes
+
+newritual     "Build Chapel"
+level                 	1
+free
+apcost					8
+terr                 	-42 # Land
+aiwhere					-71
+alterloc             	92 # Temple
+maxcast 				1
+forgetcurrit
+soundfx               	57
+descr "The Monk spends the season building a small Temple from which he can better serve the kingdom. May be cast once to allow Monk to upgrade and start building. Choose location carefully."
+
+newritual     "Divine Protection"
+level                 	2
+free
+cost					0 50 # 50 gold
+apcost					2
+planereq				0
+terr                 	-2 # temples
+aiwhere					-2
+gainbless				100
+soundfx               	57
+descr "The Abbot goes about fervently praying for divine aid to protect the duchy. As well as himself should the Duke be cross with him."
+
+selectmonster "Abbot "
+power 0 2
+
+selectmonster "Monk "
+power 0 1
+
+#---Duke Rituals---#
+newritpow #Duke
+
+newritual "Alchemy " 
+copyritual "Alchemy"
+
+newritual "Greater Alchemy "
+copyritual "Greater Alchemy" 
+
+newritual "True Alchemy "
+copyritual "True Alchemy"
+
+newritual "Raise Castle "
+copyritual "Raise Castle"
+
+newritual     "Lesser Ritual of Mastery"                                  # 330
+descr "This ritual grants the caster a new first level ritual."
+copyritual "Lesser Ritual of Mastery"
+level                  1
+cost              1   25 # 50 Iron
+
+newritual "Attract Intellectuals"
+terr                 -14 # Required terrain: human settlement.
+nomonreq                 # Monsters in strings beginning with "(-)" must not be here.
+sacrscale                # Summoning amount scales with sacrifice income of target square.
+summoning                # The ritual will summon the monsters specified in a random string.
+aialways             100 # AI will always try to cast this ritual if it currently can, but it will not make long term plans to do so.
+addstring     "1d4+1*Arquebussier"
+addstring     "(-)Arquebssier"     # This string will only be used by nomon[...] commands.
+descr "The noble showcases some basic alchemical inventions to the common folk. Anyone who expresses enough intelligence to comprehend what is going on will be pressganged into the army and given an arquebus. Doesn't work if there are already arquebussiers in the army as word gets around."
+
+newritual     "Strip Mine"
+level                 	1
+cost					1 -25
+apcost					5
+terr                 	12 # Mountain
+soundfx               	57
+airare 					20
+descr "The noble spends the next two months mining for what little iron there is in the mountains. Useful in a pinch."
+
+newritual     "Ritual of Mastery"                                         #  19
+descr "This ritual grants the caster a new second level ritual.  If the caster is currently unable to cast second level rituals, it will be leveled up as well."
+level                  2
+cost              1  150 # 150 Iron
+newrit                 2 # Caster will learn a new ritual of level 2.
+soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+rebatelvl              2 # Ritual can be cast for half price if caster's power level is greater than or equal to 2.
+free                     # Always start with this ritual in addition to the others.
+notforpoor
+
+newritual     "Ritual of Grand Mastery"                                   #  20
+descr "This ritual grants the caster a new third level ritual.  If the caster is currently unable to cast third level rituals, it will be leveled up as well."
+level                  2
+cost              1  350 # 350 Iron
+newrit                 3 # Caster will learn a new ritual of level 3.
+soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+rebatelvl              3 # Ritual can be cast for half price if caster's power level is greater than or equal to 3.
+free                     # Always start with this ritual in addition to the others.
+notforpoor               # Ritual casters that have a negative rebate cannot learn this ritual.
+
+newritual 	"Debug"
+descr "Through creful experimentation, it is possible for the noble alchemist to build basic artillery. While hardly the strongest or accurate artillery piece, these mortars can be built en masse. Rather time consuming due to the trial and error required."
+level 					 1
+cost 					 0 -500
+cost 					 1 -705
+apcost  				 -1
+rebatelvl 				 3
+summoning 
+airare 						0
+addstring "c*Lord Commander & Deathsknell & Learned Noble & Archduke"
+addstring "c*Abbot & Monk "
+soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+
+newritual 	"Build Crude Artillery"
+descr "Through careful experimentation, it is possible for the noble alchemist to build basic artillery. While hardly the strongest or accurate artillery piece, these mortars can be built en masse. Rather time consuming due to the trial and error required."
+level 					 1
+cost 					 0 50
+cost 					 1 75
+apcost  				 1
+rebatelvl 				 3
+summoning 
+addstring "1d2+1*Crude Mortar"
+soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+newritual "Reinforce Heavy Soldiers"
+descr "Fortifies a select few of Heavy Infantry and Zweihanders with alchemical armor to defend the duchy's siege engines. Cheaper for Dukes." 
+level 					1
+cost 			 		1 80 #80 Iron
+rebatelvl				2
+apcost 					2
+soundfx                 57 # Sound effect when the ritual is cast: orchhit.smp (Summoning). 
+promotion 				5
+addstring "Heavy Infantry"
+addstring "Ducal Guard"
+addstring "Zweihander"
+addstring "Ducal Zweihander"
+
+newritual 	"Build Field Artillery"
+descr "Through careful experimentation, the Duke can build field artillery. While not the strongest of artilleries, these ones are more portable and can follow the main army."
+level 2
+cost 0 50
+cost 1 75
+apcost 1
+summoning 
+addstring "1d2+2*Field Mortar"
+addstring "1d2+1*Light Field Gun"
+soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+
+newritual 	"Alchemical Trebuchet  "
+copyritual 	"Alchemical Trebuchet"
+descr "Alchemists of extraordinary skills can craft trebuchets able to launch alchemical ammunition instead of ordinary boulders. The alchemical ammunition cause slightly less damage where they hits, but each of them explodes covering an area in flames"
+
+newritual 	"Alchemical Catapult "
+copyritual 	"Alchemical Catapult"
+level 1
+descr "Alchemists of extraordinary skills can craft catapults able to launch alchemical ammunition instead of ordinary boulders. The alchemical ammunition cause slightly less damage where it hits, but it explodes in flames covering a far larger area."
+
+newritual     "Ascension"
+level                 	2
+cost              		0 300 # 300 gold 
+apcost					2
+terr 304
+free
+aialways 999
+airestrig 350
+aiwhere -103
+promotion 
+addstring "Duke"
+addstring "Archduke"
+nomonplayerreq 1
+addstring "(-)Archduke"
+soundfx               	57
+descr "The Duke increases his legitimacy over Elysium by seeking a bride from a monastery. The festivities will last a month as the realm gathers to celebrate their new Archduke."
+
+newritual "Modernize Army"
+level                 	3
+cost					1 200 # 0 gold and 200 iron
+#cost					1 75
+free
+maxcast 1
+promotion				999
+addstring "Spearman"
+addstring "Pikeneer"
+addstring "Swordsman"
+addstring "Halberdier"
+addstring "Heavy Infantry"
+addstring "Zweihander"
+addstring "Archer"
+addstring "Arquebussier"
+addstring "Tower Guard"
+addstring "Arquebussier"
+addstring "Crossbowman"
+addstring "Musketeer"
+addstring "Longbowman"
+addstring "Musketeer"
+addstring "Knight"
+addstring "Cuirassier"
+addstring "Cavalryman"
+addstring "Dragoon"
+addstring "Catapult"
+addstring "Field Gun"
+addstring "Ballista"
+addstring "Light Field Gun"
+addstring "Trebuchet"
+addstring "Heavy Field Gun"
+descr "The Archduke uses his now considerable funds to modernize his army to how he dreamt it would always be. Can only be cast once."
+
+newritual "Build Artillery"
+descr "A conservative midpoint between the field artillery and the castle rending cannons the Duke wants to build, field guns are a solid and accurate artillery piece, as well as relatively portable."
+level 					2
+cost 			 		0 100 #150 gold 350 Iron
+cost 					1 350
+rebatelvl 				3
+soundfx                 57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+summoning 
+addstring "1d2+2*Field Gun"
+
+newritual "Build Heavy Artillery"
+descr "The Archduke spends a month to focus on building massive artillery. Maniacal laughter can be heard in the general area as well as massive explosions, more frequently heard when the less loyal of the nobility are in the area."
+level 					3
+cost 			 		0 150 #150 gold 350 Iron
+cost 					1 500
+apcost 					2
+soundfx               57 # Sound effect when the ritual is cast: orchhit.smp (Summoning).
+summoning 
+addstring "Deathsknell"
+addstring "1d2+2*Heavy Field Gun"
+
+newritual     "Seek Church-Approved Bride"
+level                 	3
+cost              		0 350 # 350 gold 
+apcost					8
+terr 304
+aialways 999
+airestrig 350
+aiwhere -103
+summoning
+addstring "c*Red Lady"
+addstring "c*Green Lady"
+addstring "c*White Lady"
+addstring "c*Black Lady"
+nomonplayerreq 1
+addstring "(-)Red Lady"
+addstring "(-)Green Lady"
+addstring "(-)White Lady"
+addstring "(-)Black Lady"
+soundfx               	57
+descr "The Archduke increases his legitimacy over Elysium by seeking a bride from a monastery. The festivities will last a season as the realm gathers to celebrate their Archduke's wedding. Interestingly, the new Archduchess has no such inhibitions and can quickly depart to start solidifying her power. Only one Archduchess can be present at a time."
+
+selectmonster "Learned Noble"
+power 0 1
+
+selectmonster "Duke"
+power 0 2
+
+selectmonster "Archduke"
+power 0 3
+
+#---Builder Port---# Simplifies the builder concepts from TO and codes it better 
+
+newmonster "Master Builder"
+copystats "Scout"
+copyspr "Scout"
+noleader
+descr "A not-so-humble builder of the Human race."
+
+newmonster "Builder"
+copystats "Scout"
+copyspr "Scout"
+noleader
+descr "A humble builder of the Human race."
+
+newmonster "Soulless Builder"
+copystats "Scout"
+copyspr "Soulless"
+noleader
+descr "A humble builder of... some race, it's difficult to identify now."
+
+newmonster "Hoburg Builder"
+copystats "Hoburg Scout"
+copyspr "Hoburg Scout"
+noleader 
+descr "A humble builder of the Hoburg Race"
+
+newmonster "Desert Builder"
+copystats "Scout"
+copyspr "Scout"
+noleader
+descr "A humble builder of the Human race with an affinity for the desert."
+
+newmonster "Ba'alist Desert Builder"
+copystats "Scout"
+copyspr "Scout"
+noleader
+descr "A not-so-humble builder of the Human race with an affinity for the desert."
+
+newmonster "Airya Builder"
+copystats "Airya Scout"
+copyspr "Airya Scout"
+noleader
+descr "A humble builder from the Airya race."
+
+newmonster "Pale One Builder"
+copystats "Pale One Scout"
+copyspr "Pale One Scout"
+noleader
+descr "A humble builder from the Olmic race."
+
+newmonster "Markata Builder"
+copystats "Markata"
+copyspr "Markata"
+noleader
+descr "A humble builder of the Monkey peoples."
+
+#---Builder Rituals---#
+
+newritpow # General Human Rits
+
+newritual     "Attract Farmworkers"
+level                 	1
+free
+cost              		0 10 # 10 gold
+apcost 					2
+terr                 	-103 # Plain-alikes
+aiwhere					-103
+alterloc             	5 # Farm
+nonearby1req			5
+soundfx               	57
+descr "The Builder attracts some farmworkers to a site and begins building them a barnhouse. Must not be adjacent to another farm.."
+
+newritual     "Expand Farm"
+level                 	1
+free
+cost					0 25 # 25 gold
+planereq				0
+apcost 					2
+terr                 	5 # Farm
+aiwhere					5
+alterloc             	7 # Hamlet
+nonearby1req			7
+soundfx               	57
+descr "The Builder spends some of his liege's hard earned gold on building a farm. Must not be directly adjacent to other Hamlets."
+
+newritual     "Expand Hamlet"
+level                 	2
+free
+cost					0 25 # 30 gold
+planereq				0
+apcost 					2
+terr                 	7 # Hamlet
+aiwhere					7
+alterloc             	18 # Village
+nonearby3req			18
+soundfx               	57
+descr "The Builder spends some of his liege's hard earned gold on building houses for the locals. Must not be within three tiles of other villages."
+
+newritual     "Clearcut"
+level                 	2
+free
+apcost 					5
+cost              		0 10 # 10 gold 
+apcost					2
+terr                 	-6 # Forest/jungle
+alterloc             	0 # Plain-alikes
+airare 75
+soundfx               	57
+descr "The Builder spends the next two months clearing away a forested area."
+
+newritual     "Establish Foothold"
+level                 	2
+free
+cost					0 50 # 50 gold and 20 iron
+cost					1 20
+apcost 					2
+planereq				0
+apcost 					5
+terr                 	-103 # Plains
+aiwhere					-103
+alterloc             	21 # Town
+nonearby5req			21
+soundfx               	57
+descr "The Builder spends a month constructing a walled tower to defend the surronding lands. Must not be within 5 tiles of another Guard Tower."
+
+newritual     "Fortify Village"
+level                 	3
+free
+cost					0 35 # 35 gold and 20 iron
+cost					1 20
+planereq				0
+apcost 					5
+terr                 	18 # Market Village
+aiwhere					206
+alterloc             	17 # Town
+nonearby5req			17
+soundfx               	57
+descr "The Builder spends two months constructing walls and other defenses be added to a village so that it is easier to defend. Must not be within 5 tiles of another Town."
+
+selectmonster "Archduke"
+power 0 3
+
+selectmonster "King"
+power 0 3
+
+selectmonster "Merchant Prince"
+power 0 3
+
+selectmonster "Duke"
+power 0 2
+
+selectmonster "Baron"
+power 0 2 
+
+#---Mining Builder---#
+
+newritual     "Source Iron"
+level                 	2
+free
+apcost 					5
+cost					0 50 # 50 gold and 30 iron
+cost					1 25
+planereq				0
+terr                 	12 # Mountain
+aiwhere					12
+alterloc             	14 # Iron Mine
+nonearby3req			14
+soundfx               	57
+descr "The Builder starts digging into the earth and laying mineshafts. Must not be within 3 tiles of another Iron Mine."
+
+selectmonster "Learned Noble"
+power 0 2
+
+selectmonster "Duke"
+power 0 2
+
+
+selectmonster "Pale One Builder"
+power 0 2
+
+selectmonster "Master Builder"
+power 0 1
+
+#---Soulless Builder---#
+
+newritpow # Necro/Nekro constructions
+
+newritual     "Build New Citadel"
+level                 	2
+free
+cost              		0 100
+cost					1 50
+apcost					2
+terr                 	-71 # Flatland
+aiwhere					-71
+alterloc             	24 # Necro Citadel
+nonearby5req			24
+soundfx               	57
+descr "In order to expand his domain, a dabbler in the necromantic arts must secure new Citadels around which to build his unlife camps. Must be a minimum of 5 tiles from the nearest Dark Citadel."
+
+#---Desertification Builder---#
+
+newritual "Desertification"
+aiwhere					-71
+level					1
+free
+apcost 					8
+apcost					-1
+terr					-71 # Flatland
+aiwhere					-71
+alterloc				117 # Desert
+descr "The Builder spends a season channeling fetid magic into the ground, turning a plain into a desert paradise.."
+
+newritual     "Build Ziggurat"
+level                 	3
+free
+cost              		0   60 # 60 gold and 30 iron
+cost					1	30
+apcost					2
+terr                 	117 # Desert
+aiwhere					117
+alterloc             	167 # Ziggurat
+nonearby7req			167
+soundfx               	57
+descr "The desert builder erects a Ziggurat for the benefit of Ba'al's giant followers. Must be at least 7 tiles from nearest Ziggurat."
+
+newritual     "Build Desert Palace"
+level                 	2
+free
+cost              		0   120 # 120 gold and 30 iron
+cost					1	30
+apcost					2
+terr                 	117 # Desert
+aiwhere					117
+alterloc             	160 # Desert Palace
+nonearby7req			160
+soundfx               	57
+descr "The Desert Builder constructs a palace in the desert. Must be at least 7 tiles from nearest Desert Palace."
+
+selectmonster "Desert Builder"
+power 0 2
+
+selectmonster "Ba'alist Desert Builder"
+power 0 3
+
+#---Pale One Builder---#
+
+newritual     "Make Lair"
+level               1
+rebatelvl			3
+free
+cost              	1   100 # 100 iron and 50 emerald, half at T3
+cost				10	50
+apcost              5
+terr                47 # Agartha Ground
+aiwhere				47
+alterloc          	121 # Pale One Lair
+nonearby5req		121
+soundfx             57
+descr "The Pale One Builder finds a suitable spot to create a new 'court' for the King. Must be at least 5 tiles from nearest Huge Cave."
+
+newritual     "Unearth Iron"
+level               1
+free
+cost              	0 25 # 25 Gold and 10 emerald
+cost				10 10
+apcost              2
+terr                47 # Agartha Ground
+aiwhere				47
+alterloc          	187 # Agartha Iron Mine
+nonearby1req		187
+nearby3req			121
+soundfx             57
+descr "The shaman dowses for a vein of ore and orders his followers to dig it up. Must be within 3 tiles of a Huge Cave and may not be adjacent to other iron deposits."
+
+newritual     "Unearth Silver"
+level               2
+free
+cost              	0 75 # 75 gold and 20 emeralds
+cost				10 20
+apcost              5
+terr                187 # Agartha Iron Mine
+aiwhere				187
+alterloc            186 # Agartha Silver Mine
+nonearby3req		186
+nearby5req			121
+soundfx             57
+descr "The shaman dowses for a vein of silver and orders his followers to dig it up. Must be within 5 tiles of a Huge Cave and must be at least 3 tiles from the nearest silver deposit."
+
+#---Cloud Lord Builder---#
+
+newritpow 
+
+newritual     "Use Cloud Axes"
+level               	1
+free
+cost              		9 -8 # gain 8 diamonds and 15 sapphires
+cost					8 -15
+apcost              	2
+terr                	208 # Cloud Forest
+aiwhere					208
+alterloc          		194 # Cloud
+soundfx             	57
+descr "By using axes made of clouds, an Airya Builder can cut down a cloud forest and extract its elemental power."
+
+newritual     "Populate Clouds"
+level               	2
+free
+cost              		9 5 # 5 diamond
+apcost              	2
+terr                	194 # Cloud
+aiwhere					194
+alterloc          		262 # Cloud Hamlet
+nonearby1req			262
+ainotclose1				262
+soundfx             	57
+descr "The Airya Builder makes or creates cloudfolk and encourages them to settle in this location. Must be at least 1 tile from the nearest Cloud Hamlet."
+
+newritual     "Upgrade Hamlet"
+level               	2
+free
+cost					9 10
+apcost              	2
+terr                	262 # Cloud Hamlet
+aiwhere					262
+alterloc          		261 # Cloud Village
+nonearby1req			261
+ainotclose1				261
+soundfx             	57
+descr "The Airya Builder organizes the local cloudfolk and works on expanding the cloud settlement. Must be at least 1 tile from the nearest Cloud Village."
+
+newritual     "Urbanize Clouds"
+level               	3
+free
+cost              		9 25 # 25 diamonds and sapphires
+cost					8 25
+apcost              	5
+terr                	261 # Cloud Village
+aiwhere					261
+alterloc            	260 # Cloud city
+nonearby7req			260
+ainotclose3				260
+soundfx             	57
+descr "The Airya Builder gathers even more cloudfolk into the area and builds the foundations of a fortified cloud city. Must be at least 7 tiles from the nearest Cloud City."
+
+selectmonster "Airya Builder"
+power 0 3
+
+#---Hoburg Builder---#
+
+newritpow
+
+newritual     "Fortify Hoburg"
+level                 	1
+free
+cost              		0 25 # 25 gold and iron
+cost					1 25
+apcost					2
+terr                 	70 # Hoburg Village
+aiwhere					70
+alterloc             	1 # Fortified Hoburg
+nonearby5req			1
+ainotclose3				1
+soundfx               	57
+descr "The Burgmeister sets about improving the defenses around a Hoburg Village. Must be at least 5 tiles from nearest Fortified Hoburg."
+
+newritual     "Expand Corpse Stocks"
+level                 	2
+free
+cost              		0 25 # 25 gold and 5 hands
+cost					1 5
+apcost				    3
+planereq				0
+terr                    -71 # flatland
+aiwhere					-71
+alterloc             	248 # Hobbit Graveyard
+nearby1req				70
+ainotclose1				70
+soundfx               	57
+descr "The Nekromant sets to 'acquiring' new recruits and gathering them in a graveyard near a Hoburg Village. Must be adjacent to a Hoburg Village."
+
+selectmonster "Burgmeister"
+power 0 1
+
+selectmonster "Nekromant"
+power 0 2
+selectmonster "Grand Nekromant"
+power 0 2
