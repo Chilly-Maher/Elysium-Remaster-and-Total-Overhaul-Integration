@@ -99,7 +99,7 @@ rank                           1 # Front rank.
 meleeweapon                2 768 # Ice Lance: d4 Pierce damage.
 flying                          
 coldres                      50 
-poisonres                    100 # Poison immunity.
+poisonres                    25 # Poison immunity.
 shockres                     100 # Shock immunity
 flying
 frontpos
@@ -112,7 +112,68 @@ shield                           # Reduces damage from most weapons by 0-1; 0-2 
 allitemslots                     # Has the full set of item slots.
 iceprot
 fireres                     -100 
-descr "Airya warriors now eternally encased in diamond, the Diamondclad are a strong if unconventional method to seize the power of air. While it can't be said that they mind it too much - possibly because that involves too much thinking - there is a potential ethics debate on seizing your warriors at random and mutating their body permenantly. It's unclear what the long term effect of this process is as none of the Diamondclad have lived to old age. The most common death involves either physically melting, or shattering like a rock."
+descr "Airya warriors now eternally encased in diamond, the Diamondclad are a strong if unconventional method to seize the power of air. While it can't be said that they mind it too much - possibly because that involves too much thinking - there is a potential ethics debate here on whether seizing your warriors at random and mutating their body permenantly is ethical. It's unclear what the long term effect of this process is as none of the Diamondclad have lived to old age. The most common death involves either physically melting, or shattering like a rock."
+
+newweapon "Poisoned Blade"
+range 1
+init 4
+dmgtype 1
+dmg 6
+mundane
+sound 8
+next
+nextdmg 8
+
+newweapon "Hashishin Poison"
+dmgtype 9
+an
+
+newmonster "Night Guard"
+spr1 "!Strum/Caelum/raven_idle.tga"
+spr2 "!Strum/Caelum/raven_attack.tga"
+armor                          2 # Armor.
+hp                             7 # Hit Points.
+str                            5 # Strength.
+mor                            6 # Morale.
+mr                             6 # Magic Resistance.
+rank                           1 # Front rank.
+meleeweapon                2 "Poisoned Blade"
+meleeweaponbonus		   0 "Poisoned Blade"
+flying                          
+shockres 25
+fireres -25
+stealth
+allitemslots                     # Has the full set of item slots.
+battlefast                       # Can move 2 squares per turn in combat.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+descr "It is a common misconception that the Dusk Guard and the Night Airya are the same. While the Night Guard draw from the ranks of the Dusk Guard, they are fundamentally different in that the Night Guard focuses especially on ambushes on the ground, and are not typically commanded by the Cloud Lords. Rather, they are led by the Shadow Airya, a secretive group of assassins that are schooled in magic."
+
+newmonster "Shadow Airya Assassin"
+spr1 "!Strum/Caelum/caretaker_idle.tga"
+spr2 "!Strum/Caelum/caretaker_attack.tga"
+armor                          0 # Armor.
+hp                             6 # Hit Points.
+str                            3 # Strength.
+mor                            6 # Morale.
+mr                             8 # Magic Resistance.
+rank                           -1 # Front rank.
+spellweapon                9   2 # Dark Magic at level 2.
+meleeweapon                0   0 # Fist: d1 Blunt damage.
+assassinweapon             2 611 # Terror
+flying                          
+shockres 50
+fireres -25
+coldres 25
+stealth
+acutesenses
+spiritsight
+invisible
+allitemslots                     # Has the full set of item slots.
+battlefast                       # Can move 2 squares per turn in combat.
+human                            # Vulnerable to weapons and spells that only affect humans; leaves a humanoid corpse on death.
+allitemslots                     # Has the full set of item slots.
+descr "Very little is known of the Shadow Airya. Allegedly responsible for the deaths of several Airyan rulers, their motives are a mystery, though some of the more mighty of the Airyan rulers are able to bind them to their will in unknown ways. Skilled in dark magic, they primarily use terror and ambushes to slay their foes."
 
 
 #---Cloud Lord Rituals---#
@@ -135,7 +196,7 @@ descr "This ritual awakens one of the five Silent Kings from his vigil. The Sile
 selectritual "Infuse Warriors With Diamonds"
 ritpow                49 	# Cloud Lord
 level                  2
-cost              9   25 	# 300 Diamonds
+cost              9   25 	# 25 Diamonds
 promotion			  5    
 addstring "Airya Swordsman"
 addstring "Diamondclad"
@@ -143,12 +204,33 @@ addstring "Iceclad"
 addstring "Diamondclad"
 descr "This ritual permanently turns five Airya warriors bodies into a diamondlike sheathe."
 
+newritual "Lightning Walk"
+ritpow 					49 # Cloud Lord
+level 					3
+cost					8 10 # 10 sapphires and diamonds
+cost					9 10
+terr 					307 # Thunder Cloud
+chooseterrloc 			307
+teleportloc				2
+airare					-1
+closewin 				# closes cast ritual window
+descr "The Eagle King uses the elemental energy in a Thunder Cloud to reform his army in another for a much reduced cost. Historically has decimated entire armies because the King forgot not all of his people can shrug off lightning bolts."
+
+newritual "Call on the Shadow Airya"
+ritpow 					49 # Cloud Lord
+level 					3
+cost					9 50 # 50 diamonds, 100 emerald
+cost					10 100
+summoning "c*Shadow Airya Assassin & 8d2*Night Guard"
+closewin 				# closes cast ritual window
+descr "This ritual binds several of the Night Airya to service. Skilled assassins, they are less suited to sieges than the Dusk Guard but are better at operating alone."
+
 newritpow
 
-newritual "Greater Cloud Step"
+newritual "Cloudstep"
 level 					2
-cost               		8 25 # 25 sapphires & 25 diamonds
-cost					9 25
+cost               		8 20 # 20 sapphires & 20 diamonds
+cost					9 20
 free
 terr 					194 # Cloud
 chooseterrloc 			194
@@ -159,6 +241,20 @@ descr "The Cloud Prince has his army absorbed into a cloud and reforms it in ano
 
 selectmonster "Cloud Prince"
 power 0 2
+
+newritpow
+newritual "Field Reinforcements"
+level 1
+cost 0 50
+cost 10 35
+free
+apcost 2
+summoning
+addstring "5d2*Night Guard"
+descr "Increase the assassin party by sending a magic message to the Shadow Airya. This takes a month's time and only so many can answer the call."
+
+selectmonster "Shadow Airya Assassin"
+power 0 1
 
 #---Duke Changes---#
 #---Duke Weaponry---#
@@ -221,6 +317,22 @@ dmgtype    1
 dmg        7
 mundane
 sound      8
+
+sample 200 "4pdr.sw"
+sample 201 "6pdr.sw"
+sample 202 "8pdr.sw"
+sample 203 "mortarsmall.sw"
+sample 204 "mortarbig.sw"
+sample 205 "rocket.sw"
+sample 206 "arquebus.sw"
+sample 207 "flintlock.sw"
+sample 208 "tanegashima.sw"
+sample 209 "bullethit.sw"
+sample 210 "cannonhit.sw"
+sample 211 "grenadeboom.sw"
+sample 212 "8pdrmortarhit.sw"
+sample 213 "32pdrmortarhit.sw"
+sample 214 "reload.sw"
 
 newweapon "8pdr Mortar"
 trgrank 9
